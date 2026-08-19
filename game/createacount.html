@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:
+                radial-gradient(circle at top left,#4f46e5 0%,transparent 40%),
+                radial-gradient(circle at bottom right,#06b6d4 0%,transparent 40%),
+                linear-gradient(135deg,#0f172a,#312e81);
+            color:white;
+        }
+
+        .signup-box{
+            width:450px;
+            padding:45px;
+            border-radius:28px;
+            backdrop-filter:blur(20px);
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.15);
+            box-shadow:0 10px 40px rgba(0,0,0,.35);
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:30px;
+            font-size:2rem;
+        }
+
+        .input-group{
+            margin-bottom:18px;
+        }
+
+        .input-group input{
+            width:100%;
+            padding:16px;
+            border:none;
+            outline:none;
+            border-radius:16px;
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.15);
+            color:white;
+            font-size:16px;
+        }
+
+        .input-group input::placeholder{
+            color:#cbd5e1;
+        }
+
+        .input-group input:focus{
+            border-color:#60a5fa;
+            box-shadow:0 0 20px rgba(96,165,250,.25);
+        }
+
+        button{
+            width:100%;
+            padding:16px;
+            border:none;
+            border-radius:16px;
+            cursor:pointer;
+            font-size:18px;
+            font-weight:700;
+            color:white;
+            background:linear-gradient(135deg,#2563eb,#06b6d4);
+            transition:all .25s ease;
+        }
+
+        button:hover{
+            transform:translateY(-3px);
+            box-shadow:0 10px 25px rgba(37,99,235,.35);
+        }
+
+        #message{
+            text-align:center;
+            margin-top:15px;
+            min-height:20px;
+        }
+
+        .login-link{
+            text-align:center;
+            margin-top:15px;
+        }
+
+        .login-link a{
+            color:#60a5fa;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .login-link a:hover{
+            text-decoration:underline;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="signup-box">
+        <h1>Create Account</h1>
+
+        <div class="input-group">
+            <input type="text" id="fullname" placeholder="Full Name">
+        </div>
+
+        <div class="input-group">
+            <input type="email" id="email" placeholder="Email Address">
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Username">
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password">
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+        </div>
+
+        <button onclick="createAccount()">
+            Create Account
+        </button>
+
+        <button
+            onclick="window.location.href='index.html'"
+            style="margin-top:12px; background:linear-gradient(135deg,#475569,)">
+            Back to Login
+        </button>
+        
+    </div>
+
+    <script>
+        function createAccount() {
+            const password = document.getElementById("password").value;
+            const confirm = document.getElementById("confirmPassword").value;
+
+            if(password !== confirm){
+                document.getElementById("message").style.color = "#fca5a5";
+                document.getElementById("message").textContent =
+                    "Passwords do not match.";
+                return;
+            }
+
+            document.getElementById("message").style.color = "#86efac";
+            document.getElementById("message").textContent =
+                "Account created successfully!";
+        }
+    </script>
+
+</body>
+</html>

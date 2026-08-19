@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Education Perfect</title>
+<link rel="icon" href="img/ep.png" type="image/png">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    padding:40px;
+    background:
+        radial-gradient(circle at top left,#4f46e5 0%,transparent 40%),
+        radial-gradient(circle at bottom right,#06b6d4 0%,transparent 40%),
+        linear-gradient(135deg,#0f172a,#312e81);
+    color:white;
+}
+
+.title-card{
+    max-width:500px;
+    margin:0 auto 30px;
+    text-align:center;
+    padding:25px;
+
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    backdrop-filter:blur(18px);
+
+    border-radius:24px;
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+
+.sound-grid{
+    max-width:1200px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.sound-btn{
+    padding:30px;
+    border:none;
+    cursor:pointer;
+
+    border-radius:22px;
+
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(18px);
+
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+    transition:.25s;
+}
+
+.sound-btn:hover{
+    transform:translateY(-8px);
+    background:rgba(255,255,255,.16);
+    border-color:#60a5fa;
+    box-shadow:0 15px 30px rgba(37,99,235,.25);
+}
+
+.sound-btn:active{
+    transform:scale(.95);
+}
+
+.sound-card{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.pause-btn{
+    padding:12px;
+    border:none;
+    cursor:pointer;
+
+    border-radius:14px;
+
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.25s;
+}
+
+.pause-btn:hover{
+    background:rgba(255,255,255,.16);
+}
+
+.menu-btn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:1001;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    color:white;
+    font-size:24px;
+    padding:10px 15px;
+    border-radius:12px;
+    cursor:pointer;
+    backdrop-filter:blur(18px);
+}
+
+.sidebar{
+    position:fixed;
+    left:-280px;
+    top:0;
+    width:250px;
+    height:100%;
+    background:rgba(15,23,42,.95);
+    border-right:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(18px);
+    transition:.3s;
+    z-index:1000;
+    padding:20px;
+}
+
+.sidebar.open{
+    left:0;
+}
+
+.sidebar h2{
+    margin:60px 0 20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:12px;
+    border-radius:10px;
+    margin:5px 0;
+}
+
+.sidebar a:hover{
+    background:rgba(255,255,255,.1);
+}
+
+.search-container{
+    max-width:500px;
+    margin:0 auto 25px;
+}
+
+#soundSearch{
+    width:100%;
+    padding:15px 20px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.08);
+    color:white;
+    font-size:18px;
+    backdrop-filter:blur(18px);
+}
+
+#soundSearch::placeholder{
+    color:rgba(255,255,255,.7);
+}
+</style>
+</head>
+<body>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<div class="sidebar" id="sidebar">
+    <h2>Menu</h2>
+
+    <a href="links.html">All Games</a>
+    <a href="soundboard.html">Soundboard</a>
+    <a href="index.html">Home</a>
+</div>
+
+<div class="title-card">
+    <h1>Soundboard</h1>
+    <p>Click a sound to play it</p>
+</div>
+<div class="search-container">
+    <input
+        type="text"
+        id="soundSearch"
+        placeholder="Search sounds..."
+        onkeyup="filterSounds()"
+    >
+</div>
+<div class="sound-grid">
+    <button class="sound-btn" onclick="playSound('sound1')">
+        Vine Boom
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound2')">
+        Faaa
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound3')">
+        Bruh
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound4')">
+        Apple Pay
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound5')">
+        Sad Violin
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound6')">
+        Wet Fart
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound7')">
+        67
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound8')">
+        Spongebob Fail
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound9')">
+        It's Raining Tacos
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound10')">
+        Get Out!
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound11')">
+        Android Beep
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound12')">
+        Goofy Laugh
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound13')">
+        FBI Open Up!
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound14')">
+        Metal Pipe
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound15')">
+        Air Horn
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound16')">
+        My Son So Dumb
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound17')">
+        Gun Load and Shoot
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound18')">
+        AK47 Loud
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound19')">
+        Windows 7 Startup
+    </button>
+
+    <button class="sound-btn" onclick="playSound('sound20')">
+        Iphone Sent Message
+    </button>
+</div>
+
+<audio id="sound1" src="sound/vineboom.mp3"></o>
+<audio id="sound2" src="sound/faaa.mp3"></o>
+<audio id="sound3" src="sound/bruh.mp3"></o>
+<audio id="sound4" src="sound/applepay.mp3"></o>
+<audio id="sound5" src="sound/sadviolin.mp3"></o>
+<audio id="sound6" src="sound/wetfart.mp3"></o>
+<audio id="sound7" src="sound/67.mp3"></o>
+<audio id="sound8" src="sound/spongebobfail.mp3"></o>
+<audio id="sound9" src="sound/itsrainingtacos.mp3"></o>
+<audio id="sound10" src="sound/getouttuco.mp3"></o>
+<audio id="sound11" src="sound/androidbeep.mp3"></o>
+<audio id="sound12" src="sound/goofylaugh.mp3"></o>
+<audio id="sound13" src="sound/fbiopenup.mp3"></o>
+<audio id="sound14" src="sound/metalpipe.mp3"></o>
+<audio id="sound15" src="sound/airhorn.mp3"></o>
+<audio id="sound16" src="sound/mysonsodumb.mp3"></o>
+<audio id="sound17" src="sound/gunshotone.mp3"></o>
+<audio id="sound18" src="sound/ak47loud.mp3"></o>
+<audio id="sound19" src="sound/windows7startup.mp3"></o>
+<audio id="sound20" src="sound/iphonesentmessage.mp3"></o>
+
+<script>
+function playSound(id){
+    const sound = document.getElementById(id);
+
+    if(sound.paused){
+        sound.play();
+    }else{
+        sound.pause();
+    }
+}
+
+function toggleMenu(){
+    document.getElementById("sidebar").classList.toggle("open");
+}
+
+document.addEventListener("click", function(event){
+    const sidebar = document.getElementById("sidebar");
+    const button = document.querySelector(".menu-btn");
+
+    if (
+        sidebar.classList.contains("open") &&
+        !sidebar.contains(event.target) &&
+        !button.contains(event.target)
+    ){
+        sidebar.classList.remove("open");
+    }
+});
+
+function filterSounds() {
+    const input = document.getElementById("soundSearch");
+    const filter = input.value.toLowerCase();
+    const buttons = document.querySelectorAll(".sound-btn");
+
+    buttons.forEach(button => {
+        const text = button.textContent.toLowerCase();
+
+        if (text.includes(filter)) {
+            button.style.display = "";
+        } else {
+            button.style.display = "none";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

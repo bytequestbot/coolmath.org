@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Education Perfect</title>
+<link rel="icon" href="img/ep.png" type="image/png">
+
+<style>
+.menu-btn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:1001;
+    background:rgba(255,255,255,0.1);
+    border:1px solid var(--border);
+    color:white;
+    font-size:24px;
+    padding:10px 15px;
+    border-radius:12px;
+    cursor:pointer;
+    backdrop-filter:blur(18px);
+}
+
+.sidebar{
+    position:fixed;
+    left:-280px;
+    top:0;
+    width:250px;
+    height:100%;
+    background:rgba(15,23,42,0.95);
+    backdrop-filter:blur(20px);
+    border-right:1px solid var(--border);
+    transition:0.3s ease;
+    z-index:1000;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+.sidebar.open{
+    left:0;
+}
+
+.sidebar h2{
+    margin-top:50px;
+    color:white;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
+    transition:0.2s;
+}
+
+.sidebar a:hover{
+    background:rgba(255,255,255,0.1);
+}
+
+:root{
+    --bg1:#0f172a;
+    --bg2:#312e81;
+    --card:rgba(255,255,255,0.08);
+    --card-hover:rgba(255,255,255,0.16);
+    --border:rgba(255,255,255,0.15);
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:35px;
+    padding:40px 20px;
+    box-sizing:border-box;
+    background:
+        radial-gradient(circle at top left,#4f46e5 0%,transparent 40%),
+        radial-gradient(circle at bottom right,#06b6d4 0%,transparent 40%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+    color:white;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.title-card{
+    padding:22px 50px;
+    border-radius:24px;
+    background:var(--card);
+    border:1px solid var(--border);
+    backdrop-filter:blur(18px);
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+
+.title-card h1{
+    margin:0;
+    font-size:2.2rem;
+}
+
+.search-box{
+    width:100%;
+    max-width:650px;
+}
+
+.search-box input{
+    width:100%;
+    padding:16px 20px;
+    font-size:18px;
+    color:white;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    backdrop-filter:blur(18px);
+    transition:0.25s;
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:#60a5fa;
+    box-shadow:0 0 20px rgba(96,165,250,.35);
+}
+
+.links{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:24px;
+    width:100%;
+    max-width:1200px;
+}
+
+.link-bubble{
+    min-height:140px;
+    padding:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    text-decoration:none;
+    color:white;
+    font-size:1.1rem;
+    font-weight:600;
+    border-radius:22px;
+    background:var(--card);
+    border:1px solid var(--border);
+    backdrop-filter:blur(18px);
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+    transition:all .25s ease;
+}
+
+.link-bubble:hover{
+    transform:translateY(-8px);
+    background:var(--card-hover);
+    border-color:#60a5fa;
+    box-shadow:0 15px 30px rgba(37,99,235,.25);
+}
+
+.link-bubble{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+.link-bubble img{
+    width: 150px;
+    height: 150px;;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+</style>
+</head>
+<script>
+function searchLinks() {
+    const filter =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const links =
+        document.querySelectorAll(".link-bubble");
+
+    links.forEach(link => {
+        const text =
+            link.textContent.toLowerCase();
+
+        if (text.includes(filter)) {
+            link.style.display = "flex";
+        } else {
+            link.style.display = "none";
+        }
+    });
+}
+function toggleMenu(){
+    document.getElementById("sidebar").classList.toggle("open");
+}
+
+document.addEventListener("click", function(event){
+    const sidebar = document.getElementById("sidebar");
+    const button = document.querySelector(".menu-btn");
+
+    if (
+        sidebar.classList.contains("open") &&
+        !sidebar.contains(event.target) &&
+        !button.contains(event.target)
+    ){
+        sidebar.classList.remove("open");
+    }
+});
+</script>
+<body>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<div class="sidebar" id="sidebar">
+    <h2>Menu</h2>
+
+    <a href="links.html">All Games</a>
+    <a href="soundboard.html">Soundboard</a>
+    <a href="index.html">Home</a>
+</div>
+<div class="title-card">
+    <h1>Gaming Files</h1>
+</div>
+<div class="search-box">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search games..."
+        onkeyup="searchLinks()">
+</div>
+
+<div class="links">
+    <a class="link-bubble" href="game/3Dflightsimulator.html">
+       <img src="img/flight sim.jpg">
+       <div class="game-name">3D Flight Simulator</div>
+    </a>
+
+    <a class="link-bubble" href="game/gladihoppers.html">
+        <img src="img/gladihoppers.webp">
+        <div class="game-name">Gladihoppers</div>
+    </a>
+    
+    <a class="link-bubble" href="game/ducklife.html">
+        <img src="img/ducklife.jpg">
+        <div class="game-name">Ducklife</div>
+    </a>
+        
+    <a class="link-bubble" href="game/ducklife4.html">
+        <img src="img/ducklife 4.jpg">
+        <div class="game-name">Ducklife 4</div>
+    </a>
+    
+    <a class="link-bubble" href="game/holeio.html">
+        <img src="img/hole.jpg">
+        <div class="game-name">Hole.io</div>
+    </a>
+
+    <a class="link-bubble" href="game/carkingarena.html">
+        <img src="img/carkingarena.jpg">
+        <div class="game-name">Car King Arena</div>
+    </a>
+
+    <a class="link-bubble" href="game/Test2.html">
+        <img src="img/1.12.jpg">
+        <div class="game-name">Minecraft 1.12.1</div>
+    </a>
+
+    <a class="link-bubble" href="game/geometrydash.html">
+        <img src="img/geodash.jpg">
+        <div class="game-name">Geometry Dash</div>
+    </a>
+    
+    <a class="link-bubble" href="game/motox3m.htm">
+        <img src="img/motox3m.jpg">
+        <div class="game-name">Moto X3M</div>
+    </a>
+        
+    <a class="link-bubble" href="game/motox3mspookyland.html">
+        <img src="img/motox3mspookyland.jpg">
+        <div class="game-name">Moto X3M Spooky Land</div>
+    </a>
+            
+    <a class="link-bubble" href="game/motox3mwinter.html">
+        <img src="img/motox3mwinter.jpg">
+        <div class="game-name">Moto X3M Winter</div>
+    </a>
+
+    <a class="link-bubble" href="game/bitlife.html">
+        <img src="img/bitlife.png">
+        <div class="game-name">Bitlife</div>
+    </a>
+
+    <a class="link-bubble" href="game/fnaf.html">
+        <img src="">
+        <div class="game-name">Five Nights at Freddy's 3</div>
+    </a>
+
+    <a class="link-bubble" href="game/fnaf2.html">
+        <img src="">
+        <div class="game-name">Five Nights at Freddy's 2</div>
+    </a>
+
+    <a class="link-bubble" href="game/fnaf3.html">
+        <img src="">
+        <div class="game-name">Five Nights at Freddy's 3</div>
+    </a>
+    
+    <a class="link-bubble" href="game/funnyshooter2.html">
+        <img src="">
+        <div class="game-name">Funny Shooter 2</div>
+    </a>
+
+    <a class="link-bubble" href="game/ovo2.html">
+        <img src="">
+        <div class="game-name">Ovo 2</div>
+    </a>
+
+    <a class="link-bubble" href="game/ovo3dimensions.html">
+        <img src="">
+        <div class="game-name">Ovo 3 Dimensions</div>
+    </a>
+
+    <a class="link-bubble" href="game/PaperMinecraft1.15.1.html">
+        <img src="">
+        <div class="game-name">Paper Minecraft 1.15.1</div>
+    </a>
+
+    <a class="link-bubble" href="game/parkingfury.html">
+        <img src="">
+        <div class="game-name">Parking Fury</div>
+    </a>
+
+    <a class="link-bubble" href="game/snowrider.htm">
+        <img src="">
+        <div class="game-name">Snow Rider 3D</div>
+    </a>
+
+    <a class="link-bubble" href="game/subwaysurfersbeijing.html">
+        <img src="">
+        <div class="game-name">Subway Surfers Beijing</div>
+    </a>
+
+    <a class="link-bubble" href="game/subwaysurferssanfrancisco.html">
+        <img src="">
+        <div class="game-name">Subway Surfers San Francisco</div>
+    </a>
+
+    <a class="link-bubble" href="game/subwaysurfershavana.html">
+        <img src="">
+        <div class="game-name">Subway Surfers Havana</div>
+    </a>
+
+    <a class="link-bubble" href="game/escaperoad.html">
+        <img src="">
+        <div class="game-name">Escape Road</div>
+    </a>
+
+    <a class="link-bubble" href="game/escaperoad2.html">
+        <img src="">
+        <div class="game-name">Escape Road 2</div>
+    </a>
+
+    <a class="link-bubble" href="game/retrobowl.html">
+        <img src="">
+        <div class="game-name">Retrobowl</div>
+    </a>
+
+    <a class="link-bubble" href="game/retrobowlcollege.html">
+        <img src="">
+        <div class="game-name">Retrobowl College</div>
+    </a>
+
+    <a class="link-bubble" href="game/fireboyandwatergirl2.html">
+        <img src="">
+        <div class="game-name">Fire Boy and Water Girl 2</div>
+    </a>
+
+    <a class="link-bubble" href="game/fireboyandwatergirl4.html">
+        <img src="">
+        <div class="game-name">Fire Boy and Water Girl 4</div>
+    </a>
+
+    <a class="link-bubble" href="game/plantsvszombies.html">
+        <img src="">
+        <div class="game-name">Plants vs. Zombies</div>
+    </a>
+
+    <a class="link-bubble" href="game/polytrack.html">
+        <img src="">
+        <div class="game-name">Poly Track</Track></div>
+    </a>
+
+    <a class="link-bubble" href="game/badicecream.html">
+        <img src="">
+        <div class="game-name">Bad Ice-cream</div>
+    </a>
+
+    <a class="link-bubble" href="game/badicecream2.html">
+        <img src="">
+        <div class="game-name">Bad Ice-cream 2</div>
+    </a>
+
+    <a class="link-bubble" href="game/blockysnakes.html">
+        <img src="">
+        <div class="game-name">Blocky Snakes</div>
+    </a>
+
+    <a class="link-bubble" href="game/basketballstars.html">
+        <img src="">
+        <div class="game-name">Basketball Stars</div>
+    </a>
+
+    <a class="link-bubble" href="game/choppyorc.html">
+        <img src="">
+        <div class="game-name">Choppy Orc</div>
+    </a>
+
+    <a class="link-bubble" href="game/ragdoll-hit-main/index.html">
+        <img src="">
+        <div class="game-name">Ragdoll Hit</div>
+    </a>
+
+    <a class="link-bubble" href="game/cookieclicker.html">
+        <img src="">
+        <div class="game-name">Cookie Clicker</div>
+    </a>
+
+    <a class="link-bubble" href="game/2048.html">
+        <img src="">
+        <div class="game-name">2048</div>
+    </a>
+</div>
+
+</body>
+</html>
